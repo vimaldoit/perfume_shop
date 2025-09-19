@@ -4,6 +4,7 @@ import 'package:perfume_shop/data/repositories/repository.dart';
 import 'package:perfume_shop/services/secure_storage_service.dart';
 import 'package:perfume_shop/ui/screens/home/home.dart';
 import 'package:perfume_shop/ui/screens/home/home_bloc.dart';
+import 'package:perfume_shop/ui/screens/home/home_test.dart';
 import 'package:perfume_shop/ui/screens/login/login.dart';
 import 'package:perfume_shop/ui/screens/login/login_bloc.dart';
 import 'package:perfume_shop/utils/colors.dart';
@@ -49,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 create:
                     (context) =>
                         HomeBloc(Repository())..add(FetchHomeDataEvent()),
-                child: HomeScreen(),
+                child: TextHome(),
               ),
         ),
         (route) => false,

@@ -13,14 +13,15 @@ import 'package:perfume_shop/ui/screens/home/home_bloc.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/brands_section.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/carousel_section.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/cartegory_section.dart';
+import 'package:perfume_shop/ui/screens/home/widgets/product_collection_sec.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/product_item_tile.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/rfq_banner.dart';
 
 import 'package:perfume_shop/utils/colors.dart';
 import 'package:sizer/sizer.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class TextHome extends StatelessWidget {
+  const TextHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,29 +38,7 @@ class HomeScreen extends StatelessWidget {
               final homeData = state.homedata.data;
 
               final homeFields = homeData?.homeFields ?? [];
-              List<CarouselItems> carousalData = [];
-              List<Brands> brandsData = [];
-              List<Categories> categoryData = [];
-              List<Products> productList = [];
 
-              String rfqImage = "";
-              for (var data in homeFields) {
-                if (data.type == "carousel") {
-                  carousalData.addAll(data.carouselItems ?? []);
-                }
-                if (data.type == "brands") {
-                  brandsData.addAll(data.brands ?? []);
-                }
-                if (data.type == "category") {
-                  categoryData.addAll(data.categories ?? []);
-                }
-                if (data.type == "rfq") {
-                  rfqImage = data.image ?? '';
-                }
-                if (data.type == "collection") {
-                  productList.addAll(data.products ?? []);
-                }
-              }
               return Column(
                 children: [
                   Container(
@@ -194,41 +173,38 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 15,
-                        ),
-                        child: Column(
-                          children: [
-                            CarouselSec(carouseldata: carousalData),
-                            SizedBox(height: 20),
-                            HeadingWithViewSec(
-                              heading: "Shop by brands",
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 20),
-                            BrandSec(brandsData: brandsData),
-                            SizedBox(height: 20),
-                            HeadingWithViewSec(
-                              heading: "Our Categories",
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 20),
-                            CategorySec(categories: categoryData),
-                            SizedBox(height: 20),
-                            RfqBanner(imgUrl: rfqImage),
-                            SizedBox(height: 20),
-                            HeadingWithViewSec(
-                              heading: "New Arrivals",
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 20),
-                            // ProductItemTile(productItem: ,)
-                          ],
-                        ),
-                      ),
+                    child: ListView.builder(
+                      itemCount: homeFields.length,
+                      itemBuilder: (context, index) {
+                        final item = homeFields[index];
+                        switch (item.type) {
+                          case 'carousel':
+                            return CarouselSec(
+                              carouseldata: item.carouselItems ?? [],
+                            );
+                          case 'brands':
+                            return BrandSec(brandsData: item.brands ?? []);
+                          case 'category':
+                            return CategorySec(
+                              categories: item.categories ?? [],
+                            );
+                          case 'rfq':
+                            return RfqBanner(imgUrl: item.image ?? "");
+                          case 'collection':
+                            return ProductCollectionSec(
+                              productList: item.products ?? [],
+                              title: item.name ?? "",
+                            );
+                          // case 'future-order':
+                          //   return buildImageBanner(item['image']);
+                          // case 'banner-grid':
+                          //   return buildBannerGrid(item['banners']);
+                          // case 'banner':
+                          //   return buildImageBanner(item['banner']['image']);
+                          default:
+                            return SizedBox.shrink();
+                        }
+                      },
                     ),
                   ),
                 ],

@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:perfume_shop/data/models/categories_model.dart';
 import 'package:perfume_shop/ui/common_widgets/heading_with_view_sec.dart';
+import 'package:perfume_shop/utils/colors.dart';
 import 'package:sizer/sizer.dart';
 
 class CategorySec extends StatelessWidget {
@@ -57,11 +59,21 @@ class CategorySec extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(50),
-                      child: Image.network(
-                        category.image ?? '',
+                      child: CachedNetworkImage(
+                        imageUrl: category.image ?? '',
                         height: 60,
                         width: 60,
                         fit: BoxFit.cover,
+
+                        placeholder:
+                            (context, url) =>
+                                Center(child: CircularProgressIndicator()),
+                        errorWidget:
+                            (context, url, error) => const Icon(
+                              Icons.broken_image,
+                              size: 40,
+                              color: AppColors.greyColor,
+                            ),
                       ),
                     ),
                   ),

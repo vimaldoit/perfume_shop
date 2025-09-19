@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:perfume_shop/utils/colors.dart';
 import 'package:sizer/sizer.dart';
@@ -15,12 +16,23 @@ class RfqBanner extends StatelessWidget {
           SizedBox(height: 20),
           Stack(
             children: [
-              Image.network(
-                imgUrl,
+              CachedNetworkImage(
+                imageUrl: imgUrl,
                 width: double.infinity,
                 height: 160,
                 fit: BoxFit.cover,
+
+                placeholder:
+                    (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                errorWidget:
+                    (context, url, error) => const Icon(
+                      Icons.broken_image,
+                      size: 40,
+                      color: AppColors.greyColor,
+                    ),
               ),
+
               Container(
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(

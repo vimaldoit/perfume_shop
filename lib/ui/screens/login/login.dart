@@ -43,7 +43,21 @@ class LoginScreen extends StatelessWidget {
           return Container(
             padding: EdgeInsets.all(20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Spacer(),
+                Center(
+                  child: const Text(
+                    "Explore our fragrance collection",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: AppColors.textColor,
+                      height: 1.4,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
                 Spacer(),
                 SizedBox(
                   width: double.infinity,
@@ -69,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                       foregroundColor: AppColors.buttonTextcolor,
                     ),
                     child: Text(
-                      "Guest Login",
+                      "Continue as Guest",
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,

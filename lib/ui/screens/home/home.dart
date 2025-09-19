@@ -9,10 +9,14 @@ import 'package:perfume_shop/data/models/categories_model.dart';
 import 'package:perfume_shop/data/models/product_model.dart';
 import 'package:perfume_shop/ui/common_widgets/app_loader.dart';
 import 'package:perfume_shop/ui/common_widgets/heading_with_view_sec.dart';
+import 'package:perfume_shop/ui/common_widgets/notification_with_badge.dart';
 import 'package:perfume_shop/ui/screens/home/home_bloc.dart';
+import 'package:perfume_shop/ui/screens/home/widgets/banner_grid_section.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/brands_section.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/carousel_section.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/cartegory_section.dart';
+import 'package:perfume_shop/ui/screens/home/widgets/image_banner.dart';
+import 'package:perfume_shop/ui/screens/home/widgets/product_collection_sec.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/product_item_tile.dart';
 import 'package:perfume_shop/ui/screens/home/widgets/rfq_banner.dart';
 
@@ -37,29 +41,7 @@ class HomeScreen extends StatelessWidget {
               final homeData = state.homedata.data;
 
               final homeFields = homeData?.homeFields ?? [];
-              List<CarouselItems> carousalData = [];
-              List<Brands> brandsData = [];
-              List<Categories> categoryData = [];
-              List<Products> productList = [];
 
-              String rfqImage = "";
-              for (var data in homeFields) {
-                if (data.type == "carousel") {
-                  carousalData.addAll(data.carouselItems ?? []);
-                }
-                if (data.type == "brands") {
-                  brandsData.addAll(data.brands ?? []);
-                }
-                if (data.type == "category") {
-                  categoryData.addAll(data.categories ?? []);
-                }
-                if (data.type == "rfq") {
-                  rfqImage = data.image ?? '';
-                }
-                if (data.type == "collection") {
-                  productList.addAll(data.products ?? []);
-                }
-              }
               return Column(
                 children: [
                   Container(
@@ -86,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: "Vimal!",
+                                      text: "User!",
                                       style: TextStyle(
                                         color: AppColors.textColor,
                                         fontSize: 18.sp,
@@ -97,9 +79,8 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                               Spacer(),
-                              Icon(
-                                Icons.notifications_outlined,
-                                color: AppColors.textColor,
+                              NotificationWithBadge(
+                                count: homeData?.notificationCount ?? 0,
                               ),
                             ],
                           ),
@@ -194,41 +175,39 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 15,
-                        ),
-                        child: Column(
-                          children: [
-                            CarouselSec(carouseldata: carousalData),
-                            SizedBox(height: 20),
-                            HeadingWithViewSec(
-                              heading: "Shop by brands",
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 20),
-                            BrandSec(brandsData: brandsData),
-                            SizedBox(height: 20),
-                            HeadingWithViewSec(
-                              heading: "Our Categories",
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 20),
-                            CategorySec(categories: categoryData),
-                            SizedBox(height: 20),
-                            RfqBanner(imgUrl: rfqImage),
-                            SizedBox(height: 20),
-                            HeadingWithViewSec(
-                              heading: "New Arrivals",
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 20),
-                            // ProductItemTile(productItem: ,)
-                          ],
-                        ),
-                      ),
+                    child: ListView.builder(
+                      itemCount: homeFields.length,
+                      itemBuilder: (context, index) {
+                        final item = homeFields[index];
+                        switch (item.type) {
+                          case 'carousel':
+                            return CarouselSec(
+                              carouseldata: item.carouselItems ?? [],
+                            );
+                          case 'brands':
+                            return BrandSec(brandsData: item.brands ?? []);
+                          case 'category':
+                            return CategorySec(
+                              categories: item.categories ?? [],
+                            );
+                          case 'rfq':
+                            return RfqBanner(imgUrl: item.image ?? "");
+                          case 'collection':
+                            return ProductCollectionSec(
+                              productList: item.products ?? [],
+                              title: item.name ?? "",
+                            );
+                          case 'banner-grid':
+                            return BannerGridSec(banners: item.banners ?? []);
+                          case 'banner':
+                            return ImageBanner(
+                              imgUrl: item.banner?.image ?? "",
+                            );
+
+                          default:
+                            return SizedBox.shrink();
+                        }
+                      },
                     ),
                   ),
                 ],
@@ -241,7 +220,7 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors.greyColor,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14.sp,
+                    fontSize: 18.sp,
                   ),
                 ),
               );

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:perfume_shop/data/models/brand_model.dart';
 import 'package:perfume_shop/ui/common_widgets/heading_with_view_sec.dart';
@@ -32,7 +33,19 @@ class BrandSec extends StatelessWidget {
                       height: 100,
                       width: 100,
                       padding: EdgeInsets.all(10),
-                      child: Image.network(brandsData[index].image.toString()),
+                      child: CachedNetworkImage(
+                        imageUrl: brandsData[index].image.toString(),
+
+                        placeholder:
+                            (context, url) =>
+                                Center(child: CircularProgressIndicator()),
+                        errorWidget:
+                            (context, url, error) => const Icon(
+                              Icons.broken_image,
+                              size: 40,
+                              color: AppColors.greyColor,
+                            ),
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) {

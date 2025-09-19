@@ -4,10 +4,11 @@ import 'package:perfume_shop/data/repositories/repository.dart';
 import 'package:perfume_shop/services/secure_storage_service.dart';
 import 'package:perfume_shop/ui/screens/home/home.dart';
 import 'package:perfume_shop/ui/screens/home/home_bloc.dart';
-import 'package:perfume_shop/ui/screens/home/home_test.dart';
+import 'package:perfume_shop/ui/screens/home/home.dart';
 import 'package:perfume_shop/ui/screens/login/login.dart';
 import 'package:perfume_shop/ui/screens/login/login_bloc.dart';
 import 'package:perfume_shop/utils/colors.dart';
+import 'package:sizer/sizer.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -50,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 create:
                     (context) =>
                         HomeBloc(Repository())..add(FetchHomeDataEvent()),
-                child: TextHome(),
+                child: HomeScreen(),
               ),
         ),
         (route) => false,
@@ -61,8 +62,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: Center(child: Text("Loading ...")),
+      backgroundColor: AppColors.buttonColor,
+      body: Center(
+        child: Text(
+          "PERFUME SHOP",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            fontSize: 20.sp,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:perfume_shop/data/models/carousel_item_model.dart';
+import 'package:perfume_shop/utils/colors.dart';
 
 class CarouselSec extends StatelessWidget {
   final List<CarouselItems> carouseldata;
@@ -31,9 +33,19 @@ class CarouselSec extends StatelessWidget {
                     ),
                     clipBehavior: Clip.antiAlias,
 
-                    child: Image.network(
-                      cdata.image.toString(),
+                    child: CachedNetworkImage(
+                      imageUrl: cdata.image.toString(),
+
                       fit: BoxFit.fill,
+                      placeholder:
+                          (context, url) =>
+                              Center(child: CircularProgressIndicator()),
+                      errorWidget:
+                          (context, url, error) => const Icon(
+                            Icons.broken_image,
+                            size: 40,
+                            color: AppColors.greyColor,
+                          ),
                     ),
                   );
                 }),

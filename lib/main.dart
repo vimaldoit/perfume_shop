@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Hellix',
 
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
           ),
           home: SplashScreen(),
           // BlocProvider(

@@ -48,8 +48,8 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.white,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 15,
+                        horizontal: 4.w,
+                        vertical: 4.w,
                       ),
                       child: Column(
                         children: [
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: SizedBox(
-                                  height: 40,
+                                  height: 5.h,
                                   child: TextFormField(
                                     textAlign: TextAlign.left,
                                     cursorColor: Colors.black,
@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               SizedBox(width: 15),
                               SizedBox(
-                                height: 40,
+                                height: 5.h,
                                 child: ElevatedButton(
                                   onPressed: () {},
                                   style: ElevatedButton.styleFrom(
@@ -147,6 +147,9 @@ class HomeScreen extends StatelessWidget {
                                     foregroundColor: AppColors.backgroundColor,
                                   ),
                                   child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         "Scan Here",

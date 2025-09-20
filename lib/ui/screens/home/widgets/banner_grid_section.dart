@@ -17,12 +17,12 @@ class BannerGridSec extends StatelessWidget {
         GridView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
           itemCount: banners.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
+            mainAxisSpacing: 4.w,
+            crossAxisSpacing: 4.w,
             childAspectRatio: 0.65,
           ),
           itemBuilder: (context, index) {

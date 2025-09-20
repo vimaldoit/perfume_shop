@@ -10,7 +10,7 @@ class RfqBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
       child: Column(
         children: [
           SizedBox(height: 20),
@@ -19,7 +19,7 @@ class RfqBanner extends StatelessWidget {
               CachedNetworkImage(
                 imageUrl: imgUrl,
                 width: double.infinity,
-                height: 160,
+                height: 20.h,
                 fit: BoxFit.cover,
 
                 placeholder:
@@ -41,7 +41,7 @@ class RfqBanner extends StatelessWidget {
                 ),
                 clipBehavior: Clip.antiAlias,
                 width: double.infinity,
-                height: 160,
+                height: 20.h,
 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +57,7 @@ class RfqBanner extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     SizedBox(
-                      height: 35,
+                      height: 5.h,
                       child: ElevatedButton(
                         onPressed: () {},
 

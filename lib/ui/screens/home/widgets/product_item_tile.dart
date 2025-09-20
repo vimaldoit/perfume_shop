@@ -43,8 +43,8 @@ class _ProductItemTileState extends State<ProductItemTile> {
               children: [
                 CachedNetworkImage(
                   imageUrl: widget.productItem.image.toString(),
-                  width: 80,
-                  height: 80,
+                  width: 12.h,
+                  height: 12.h,
                   fit: BoxFit.cover,
                   placeholder:
                       (context, url) =>
@@ -56,7 +56,7 @@ class _ProductItemTileState extends State<ProductItemTile> {
                         size: 70,
                       ),
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 15),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -159,7 +159,7 @@ class _ProductItemTileState extends State<ProductItemTile> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 35,
+                          height: 5.h,
                           child: ElevatedButton(
                             onPressed: () {},
 
@@ -182,7 +182,7 @@ class _ProductItemTileState extends State<ProductItemTile> {
                             child: Text(
                               "RFQ",
                               style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: 15.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -190,37 +190,39 @@ class _ProductItemTileState extends State<ProductItemTile> {
                         ),
                         SizedBox(width: 5),
                         cartCount == 0
-                            ? GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  cartCount = cartCount + 1;
-                                });
-                              },
-                              child: Container(
-                                height: 35,
-                                alignment: Alignment.center,
+                            ? Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    cartCount = cartCount + 1;
+                                  });
+                                },
+                                child: Container(
+                                  height: 5.h,
+                                  alignment: Alignment.center,
 
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColors.buttonColor,
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Text(
-                                  "Add to cart",
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.buttonTextcolor,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.buttonColor,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Text(
+                                    "Add to cart",
+                                    style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.buttonTextcolor,
+                                    ),
                                   ),
                                 ),
                               ),
                             )
                             : Expanded(
                               child: Container(
-                                height: 35,
+                                height: 5.h,
                                 alignment: Alignment.center,
 
                                 padding: EdgeInsets.symmetric(

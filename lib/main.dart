@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perfume_shop/data/repositories/repository.dart';
@@ -7,7 +9,16 @@ import 'package:perfume_shop/ui/screens/splash_screen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    Builder(
+      builder: (context) {
+        return DevicePreview(
+          enabled: !kReleaseMode,
+          builder: (context) => MyApp(), // Wrap your app
+        );
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

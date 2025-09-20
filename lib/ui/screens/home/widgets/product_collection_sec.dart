@@ -20,17 +20,17 @@ class ProductCollectionSec extends StatelessWidget {
       children: [
         SizedBox(height: 20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
           child: HeadingWithViewSec(heading: title, onPressed: () {}),
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 5),
         SizedBox(
           height: 35.h,
 
           child: ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8),
             itemBuilder: (context, index) {
               return ProductItemTile(productItem: productList[index]);
             },

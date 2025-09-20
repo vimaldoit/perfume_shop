@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:perfume_shop/data/models/carousel_item_model.dart';
 import 'package:perfume_shop/utils/colors.dart';
+import 'package:sizer/sizer.dart';
 
 class CarouselSec extends StatelessWidget {
   final List<CarouselItems> carouseldata;
@@ -12,14 +13,14 @@ class CarouselSec extends StatelessWidget {
   Widget build(BuildContext context) {
     return carouseldata.isNotEmpty
         ? Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
           child: Column(
             children: [
               SizedBox(height: 20),
 
               CarouselSlider(
                 options: CarouselOptions(
-                  height: 160,
+                  height: 20.h,
                   autoPlay: true,
                   enlargeCenterPage: false,
                   viewportFraction: 1.0,

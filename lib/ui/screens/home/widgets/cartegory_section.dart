@@ -16,7 +16,6 @@ class CategorySec extends StatelessWidget {
   Widget build(BuildContext context) {
     final random = Random();
 
-    // List of light background colors
     final bgColors = [
       Colors.pink.shade100,
       Colors.blue.shade100,
@@ -27,8 +26,9 @@ class CategorySec extends StatelessWidget {
       Colors.teal.shade100,
     ];
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 20),
           HeadingWithViewSec(heading: "Our Categories", onPressed: () {}),
@@ -40,9 +40,9 @@ class CategorySec extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.7,
+              crossAxisSpacing: 2.w,
+              mainAxisSpacing: 2.w,
+              childAspectRatio: 0.75,
             ),
             itemBuilder: (context, index) {
               final bgColor = bgColors[random.nextInt(bgColors.length)];
@@ -50,28 +50,28 @@ class CategorySec extends StatelessWidget {
               return Column(
                 children: [
                   Container(
-                    height: 70,
-                    width: 70,
+                    height: 20.w,
+                    width: 20.w,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: bgColor,
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(100),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(100),
                       child: CachedNetworkImage(
                         imageUrl: category.image ?? '',
-                        height: 60,
-                        width: 60,
+                        height: 20.w,
+                        width: 20.w,
                         fit: BoxFit.cover,
 
                         placeholder:
                             (context, url) =>
                                 Center(child: CircularProgressIndicator()),
                         errorWidget:
-                            (context, url, error) => const Icon(
+                            (context, url, error) => Icon(
                               Icons.broken_image,
-                              size: 40,
+                              size: 20.w,
                               color: AppColors.greyColor,
                             ),
                       ),
